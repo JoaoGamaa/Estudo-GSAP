@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio GSAP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Inicio">
+      <span class="brand-mark"></span>
+      <span>GSAP Lab</span>
+    </a>
+    <nav class="nav" aria-label="Secoes de estudo">
+      <a href="#fundamentos">Fundamentos</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#scroll">Scroll</a>
+      <a href="#plugins">Plugins</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero section-band">
+      <div class="hero-copy">
+        <p class="eyebrow">Guia visual para estudar animacoes web</p>
+        <h1>GSAP Lab</h1>
+        <p>
+          Uma pagina de treino com os padroes mais usados do GSAP: entrada, saida,
+          transformacoes, stagger, timeline, scroll, path, draggable, flip e texto.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#fundamentos">Comecar</a>
+          <button class="button ghost" type="button" data-run-all>Repetir tudo</button>
+        </div>
+      </div>
+
+      <div class="hero-stage" aria-label="Previa de animacoes GSAP">
+        <div class="grid-floor">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="hero-chip chip-a">to()</div>
+        <div class="hero-chip chip-b">from()</div>
+        <div class="hero-chip chip-c">timeline()</div>
+        <div class="hero-orbit"></div>
+      </div>
+    </section>
+
+    <section class="intro-strip">
+      <div>
+        <strong>Como usar</strong>
+        <span>Clique em "Rodar" para ver cada tecnica isolada. Abra `script.js` para copiar os exemplos.</span>
+      </div>
+      <div>
+        <strong>Bibliotecas</strong>
+        <span>GSAP Core, ScrollTrigger, Flip, Draggable, MotionPathPlugin e TextPlugin via CDN.</span>
+      </div>
+    </section>
+
+    <section id="fundamentos" class="section-band">
+      <div class="section-heading">
+        <p class="eyebrow">01 / Base</p>
+        <h2>Fundamentos do GSAP</h2>
+      </div>
+
+      <article class="lesson" data-lesson="to">
+        <div class="lesson-copy">
+          <p class="lesson-tag">gsap.to()</p>
+          <h3>Animar do estado atual para outro estado</h3>
+          <p>Use quando o elemento ja esta na tela e voce quer levar ele para novas propriedades.</p>
+          <code>gsap.to(".box", { x: 180, rotation: 18, duration: 1 })</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel">
+          <div class="demo-track">
+            <div class="target box-to">to</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson reverse" data-lesson="from">
+        <div class="lesson-copy">
+          <p class="lesson-tag">gsap.from()</p>
+          <h3>Entrada partindo de um estado inicial</h3>
+          <p>Ideal para revelar conteudo: o GSAP cria o caminho do valor informado ate o CSS atual.</p>
+          <code>gsap.from(".box", { y: 80, opacity: 0, scale: .6 })</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel">
+          <div class="stack-demo">
+            <div class="target box-from">A</div>
+            <div class="target box-from small">B</div>
+            <div class="target box-from wide">C</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" data-lesson="fromTo">
+        <div class="lesson-copy">
+          <p class="lesson-tag">gsap.fromTo()</p>
+          <h3>Controlar inicio e fim da animacao</h3>
+          <p>Use quando voce precisa garantir o estado inicial e final, sem depender do CSS atual.</p>
+          <code>gsap.fromTo(".box", { x: -80 }, { x: 150, opacity: 1 })</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel">
+          <div class="demo-track">
+            <div class="target box-fromto">fromTo</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson reverse" data-lesson="stagger">
+        <div class="lesson-copy">
+          <p class="lesson-tag">stagger</p>
+          <h3>Animar varios elementos em sequencia</h3>
+          <p>Perfeito para listas, galerias, cards, letras e qualquer grupo repetido.</p>
+          <code>gsap.from(".item", { y: 30, opacity: 0, stagger: .08 })</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel">
+          <div class="stagger-grid">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" data-lesson="eases">
+        <div class="lesson-copy">
+          <p class="lesson-tag">eases</p>
+          <h3>Mudar a sensacao do movimento</h3>
+          <p>`power`, `back`, `elastic`, `bounce`, `circ` e `expo` deixam a animacao natural ou expressiva.</p>
+          <code>ease: "elastic.out(1, .45)"</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel">
+          <div class="ease-row"><span>power</span><div class="ease-dot dot-power"></div></div>
+          <div class="ease-row"><span>back</span><div class="ease-dot dot-back"></div></div>
+          <div class="ease-row"><span>elastic</span><div class="ease-dot dot-elastic"></div></div>
+          <div class="ease-row"><span>bounce</span><div class="ease-dot dot-bounce"></div></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="timeline" class="section-band dark-band">
+      <div class="section-heading">
+        <p class="eyebrow">02 / Composicao</p>
+        <h2>Timelines, controle e estados</h2>
+      </div>
+
+      <article class="lesson dark" data-lesson="timeline">
+        <div class="lesson-copy">
+          <p class="lesson-tag">gsap.timeline()</p>
+          <h3>Encadear animacoes com precisao</h3>
+          <p>Timeline organiza uma cena inteira e permite sobrepor animacoes com offsets como `"-=0.2"`.</p>
+          <code>tl.from(...).to(..., "-=.2").from(...)</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel dark">
+          <div class="timeline-scene">
+            <div class="panel-card tl-card one">01</div>
+            <div class="panel-card tl-card two">02</div>
+            <div class="panel-card tl-card three">03</div>
+            <div class="timeline-bar"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson dark reverse" data-lesson="keyframes">
+        <div class="lesson-copy">
+          <p class="lesson-tag">keyframes</p>
+          <h3>Varios passos em uma unica chamada</h3>
+          <p>Bom para movimentos curtos com mudancas de escala, rotacao, posicao e cor.</p>
+          <code>keyframes: [{ x: 80 }, { y: -40 }, { rotate: 45 }]</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel dark">
+          <div class="keyframe-stage">
+            <div class="target keyframe-box">KF</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson dark" data-lesson="repeat">
+        <div class="lesson-copy">
+          <p class="lesson-tag">repeat / yoyo</p>
+          <h3>Loops, pulso e animacoes continuas</h3>
+          <p>`repeat`, `yoyo` e `repeatDelay` criam movimento continuo sem escrever varias chamadas.</p>
+          <code>repeat: 3, yoyo: true, repeatDelay: .1</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel dark">
+          <div class="pulse-ring"><div class="pulse-core"></div></div>
+        </div>
+      </article>
+
+      <article class="lesson dark reverse" data-lesson="controls">
+        <div class="lesson-copy">
+          <p class="lesson-tag">play / pause / reverse</p>
+          <h3>Controlar uma timeline</h3>
+          <p>Guarde a timeline em uma variavel para tocar, pausar, reverter, reiniciar e controlar progresso.</p>
+          <code>timeline.play(); timeline.reverse(); timeline.progress(.5)</code>
+          <div class="control-buttons">
+            <button class="run-button" type="button" data-control="play">Play</button>
+            <button class="run-button" type="button" data-control="pause">Pause</button>
+            <button class="run-button" type="button" data-control="reverse">Reverse</button>
+          </div>
+        </div>
+        <div class="demo-panel dark">
+          <div class="control-stage">
+            <div class="control-dot"></div>
+            <div class="control-card">Timeline</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="scroll" class="section-band">
+      <div class="section-heading">
+        <p class="eyebrow">03 / Pagina real</p>
+        <h2>ScrollTrigger</h2>
+      </div>
+
+      <article class="lesson scroll-card">
+        <div class="lesson-copy">
+          <p class="lesson-tag">trigger</p>
+          <h3>Revelar elementos conforme aparecem</h3>
+          <p>Use `ScrollTrigger` para iniciar animacoes quando uma secao entra no viewport.</p>
+          <code>scrollTrigger: { trigger: ".secao", start: "top 75%" }</code>
+        </div>
+        <div class="demo-panel">
+          <div class="scroll-reveal">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="pin-section">
+        <div class="pin-copy">
+          <p class="lesson-tag">pin + scrub</p>
+          <h3>Fixar uma area e sincronizar com o scroll</h3>
+          <p>Com `pin` a secao fica presa enquanto a timeline avanca. Com `scrub`, o progresso acompanha o scroll.</p>
+        </div>
+        <div class="pin-stage">
+          <div class="pin-line"></div>
+          <div class="pin-box one">scrub</div>
+          <div class="pin-box two">pin</div>
+          <div class="pin-box three">progress</div>
+        </div>
+      </article>
+
+      <article class="horizontal-scroll">
+        <div class="horizontal-track">
+          <section>
+            <h3>Horizontal</h3>
+            <p>Crie experiencias laterais animando `xPercent` com ScrollTrigger.</p>
+          </section>
+          <section>
+            <h3>Parallax</h3>
+            <p>Camadas em velocidades diferentes criam profundidade sem complicar o layout.</p>
+          </section>
+          <section>
+            <h3>Scrub</h3>
+            <p>A animacao vira uma linha do tempo controlada pela rolagem.</p>
+          </section>
+        </div>
+      </article>
+    </section>
+
+    <section id="plugins" class="section-band muted-band">
+      <div class="section-heading">
+        <p class="eyebrow">04 / Plugins</p>
+        <h2>Interacoes prontas para projetos</h2>
+      </div>
+
+      <article class="lesson" data-lesson="motionPath">
+        <div class="lesson-copy">
+          <p class="lesson-tag">MotionPathPlugin</p>
+          <h3>Animar seguindo um caminho SVG</h3>
+          <p>Bom para mapas, linhas de produto, avatares, loading e motion graphics.</p>
+          <code>motionPath: { path: "#path", align: "#path" }</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel">
+          <svg class="path-demo" viewBox="0 0 520 220" role="img" aria-label="Caminho motion path">
+            <path id="motionPathLine" d="M35 170 C110 25, 185 25, 255 132 S410 230, 485 58" />
+          </svg>
+          <div class="path-runner"></div>
+        </div>
+      </article>
+
+      <article class="lesson reverse" data-lesson="flip">
+        <div class="lesson-copy">
+          <p class="lesson-tag">Flip</p>
+          <h3>Animar entre layouts diferentes</h3>
+          <p>Capture o estado, mude classes ou DOM, e deixe o Flip calcular a transicao.</p>
+          <code>const state = Flip.getState(".item"); Flip.from(state)</code>
+          <button class="run-button" type="button">Alternar</button>
+        </div>
+        <div class="demo-panel">
+          <div class="flip-grid">
+            <div class="flip-item large">A</div>
+            <div class="flip-item">B</div>
+            <div class="flip-item">C</div>
+            <div class="flip-item tall">D</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" data-lesson="text">
+        <div class="lesson-copy">
+          <p class="lesson-tag">TextPlugin</p>
+          <h3>Trocar texto com animacao</h3>
+          <p>Util para chamadas, onboarding, banners e estados de interface.</p>
+          <code>gsap.to(".text", { text: "Novo texto" })</code>
+          <button class="run-button" type="button">Rodar</button>
+        </div>
+        <div class="demo-panel">
+          <p class="typed-text">GSAP anima propriedades CSS.</p>
+        </div>
+      </article>
+
+      <article class="lesson reverse" data-lesson="draggable">
+        <div class="lesson-copy">
+          <p class="lesson-tag">Draggable</p>
+          <h3>Arrastar elementos com fisica simples</h3>
+          <p>Arraste o bloco dentro da area. Em projetos reais, combine com `bounds`, `snap` e timelines.</p>
+          <code>Draggable.create(".drag", { bounds: ".area", inertia: false })</code>
+        </div>
+        <div class="demo-panel drag-area">
+          <div class="drag-box">arraste</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="cheatsheet section-band">
+      <div class="section-heading">
+        <p class="eyebrow">05 / Cola rapida</p>
+        <h2>Propriedades que voce mais vai copiar</h2>
+      </div>
+      <div class="cheat-grid">
+        <div><strong>Transform</strong><code>x, y, scale, rotate, skewX, transformOrigin</code></div>
+        <div><strong>Visual</strong><code>opacity, autoAlpha, clipPath, filter, backgroundColor</code></div>
+        <div><strong>Tempo</strong><code>duration, delay, repeat, yoyo, stagger</code></div>
+        <div><strong>Controle</strong><code>play(), pause(), reverse(), restart(), progress()</code></div>
+        <div><strong>Scroll</strong><code>trigger, start, end, scrub, pin, markers</code></div>
+        <div><strong>Performance</strong><code>prefira transform e opacity; evite animar layout</code></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
